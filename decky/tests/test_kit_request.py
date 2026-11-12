@@ -50,11 +50,11 @@ def test_existing_templates_are_kept_and_blank_issues_stay_on():
     assert "blank_issues_enabled: true" in (TEMPLATES / "config.yml").read_text()
 
 
-def test_readme_links_the_form_once_near_the_top():
+def test_readme_links_the_form_once_in_build_one():
     readme = (ROOT / "readme.md").read_text(encoding="utf-8")
     link = "https://github.com/FliesWithWind/inkterface/issues/new?template=kit-request.yml"
     assert readme.count(link) == 1 and readme.count("Want a DIY kit?") == 1
-    assert readme.index("## Support") < readme.index(link) < readme.index("## Screenshots")
+    assert readme.index("## Build one") < readme.index(link) < readme.index("## Features")
 
 
 def issue_body(kit, qty, region, price="_No response_", colour="_No response_"):

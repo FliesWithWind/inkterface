@@ -25,7 +25,7 @@ partial-refresh path ([partial-refresh.md](partial-refresh.md)); it links no dis
 The board is powered over USB; there is no battery.
 
 The original Adafruit ESP32-S3 Feather + eInk Breakout Friend build (Bluetooth + Qt app) does not work with the plugin
-and is not in this repository. See [Origin](../readme.md#origin).
+and is not in this repository. See [License and credits](../readme.md#license-and-credits).
 
 ## Enclosure
 

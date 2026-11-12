@@ -30,4 +30,5 @@ def test_readme_and_hardware_doc_use_every_photo_with_alt_text():
         for alt, _ in re.findall(r"!\[([^\]]*)\]\(" + path_pat + r"([^)]+)\)", text):
             assert len(alt) > 15, alt
     assert re.search(r'<img src="docs/img/build/live-telemetry.webp" alt="[^"]{15,}"', readme)
-    assert readme.index("live-telemetry.webp") < readme.index("## Screenshots") < readme.index("## The build") < readme.index("## Features")
+    assert readme.index("live-telemetry.webp") < readme.index("## Build one") < readme.index("## Features") < readme.index("## Screenshots")
+    assert readme.index("## Screenshots") < readme.index("steam-machine-front.jpg") < readme.index("build-back.jpg") < readme.index("## Hardware")
