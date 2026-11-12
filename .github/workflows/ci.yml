@@ -1,0 +1,97 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    # decky/tests (single command from decky/README.md): protocol, emulator, engine, plugin backend, OTA incl. the
+    # firmware parser/state machine compiled with g++, vendored Pillow (cp314) and the Decky-bundle stdlib check.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14" # what Decky Loader ships; the vendored Pillow is the cp314 build
+      # pyserial: opt-in tty-state oracle test only (never shipped); cryptography: ed25519 cross-check
+      # fonttools: only the freshness check of the derived fonts (decky/scripts/make_inkterface_mono.py --check)
+      - run: pip install pytest==9.1.1 pyserial==3.5 cryptography==44.0.0 coverage==7.17.2 fonttools==4.68.0
+      - name: Fetch the pinned, sha256-checked Pillow (not in git)
+        run: decky/scripts/vendor.sh
+      - name: No new large binaries (2 MB cap)
+        run: python3 tools/check_file_sizes.py
+      - name: pytest with coverage gate (OTA code + firmware updater)
+        env:
+          INKTERFACE_NETWORK: "1" # vendor.sh tests that really download from PyPI
+        run: |
+          coverage run --branch --include='decky/py_modules/inkterface_core/ota/*,decky/py_modules/inkterface_core/firmware.py' \
+            -m pytest -q decky/tests
+          coverage report --fail-under=90 -m
+
+  firmware:
+    # ee05 is the only product firmware.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            firmware/.pio/libdeps
+          key: pio-${{ hashFiles('firmware/platformio.ini') }}
+      - run: pip install platformio==6.1.18
+      - name: "Build ee05 (public example config; Wi-Fi/Steam secrets live in NVS, not the image)"
+        working-directory: firmware
+        run: |
+          cp -n src/ee05/idle_config.h.example src/ee05/idle_config.h
+          pio run -e ee05
+      - name: Firmware host tests (sanitizers)
+        working-directory: firmware
+        run: |
+          g++ -std=c++17 -O1 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc/ee05 \
+            host_test/ota_host.cpp src/ee05/ota_usb.cpp src/ee05/usbproto.cpp -o /tmp/ota_host
+          /tmp/ota_host --selftest
+          g++ -std=c++17 -O1 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc/ee05 \
+            host_test/usb_bus_watch_host.cpp src/ee05/usbproto.cpp -o /tmp/usb_bus_watch_host
+          /tmp/usb_bus_watch_host
+
+  plugin:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Fetch the pinned, sha256-checked Pillow (make_zip.py refuses to build without it)
+        run: decky/scripts/vendor.sh
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24 # vitest 5 does not start its workers on Node 20
+          cache: pnpm
+          cache-dependency-path: decky/pnpm-lock.yaml
+      - working-directory: decky
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm typecheck
+          pnpm test
+          pnpm build
+      - run: test -s decky/dist/index.js
+      - name: Static idle-preview renderer (make_zip.py ships it as bin/idle_render_host)
+        run: decky/scripts/build_idle_render.sh
+      - name: Zip builds (Decky layout)
+        run: python3 decky/scripts/make_zip.py "$RUNNER_TEMP/inkterface-decky.zip"

@@ -1,0 +1,12 @@
+{
+  "time.now": "2026-11-10T14:32:00+01:00",
+  "time.tz": "Europe/Berlin",
+  "weather": {
+    "temp": 11.4,
+    "condition": "Partly cloudy",
+    "icon": "cloud",
+    "high": 13.0,
+    "low": 6.2,
+    "units": "metric"
+  }
+}

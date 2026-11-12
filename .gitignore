@@ -1,0 +1,7 @@
+dist*/
+.pio/
+sdkconfig.*
+!sdkconfig.defaults*
+__pycache__/
+*.pyc
+

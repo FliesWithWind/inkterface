@@ -1,0 +1,78 @@
+name: plugin-release
+
+# Tag plugin-v<semver> -> test, build the Decky plugin, zip it, publish the release.
+
+on:
+  push:
+    tags: ["plugin-v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: plugin-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Version from tag must match decky/package.json
+        run: |
+          VERSION="${GITHUB_REF_NAME#plugin-v}"
+          PKG="$(node -p "require('./decky/package.json').version")"
+          FILE="$(tr -d '[:space:]' < VERSION)"
+          if [ "$VERSION" != "$PKG" ] || [ "$VERSION" != "$FILE" ]; then
+            echo "::error::tag says $VERSION, decky/package.json says $PKG, VERSION says $FILE"; exit 1
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: pip install pytest==9.1.1 pyserial==3.5 cryptography==44.0.0
+      - run: decky/scripts/vendor.sh # pinned, sha256-checked Pillow (not in git); tests and make_zip.py need it
+      - name: Full pytest (protocol, emulator, OTA, firmware host tests)
+        run: python -m pytest -q decky/tests
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24 # vitest 5 does not start its workers on Node 20
+          cache: pnpm
+          cache-dependency-path: decky/pnpm-lock.yaml
+      - name: Build frontend
+        working-directory: decky
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm typecheck
+          pnpm test
+          pnpm build
+          test -s dist/index.js
+
+      - name: Static idle-preview renderer (make_zip.py ships it as bin/idle_render_host)
+        run: decky/scripts/build_idle_render.sh
+
+      - name: "Zip (Decky layout, one top-level folder named like the plugin; same script as local builds)"
+        run: |
+          zip="$GITHUB_WORKSPACE/inkterface-plugin-${VERSION}.zip"
+          python3 decky/scripts/make_zip.py "$zip"
+          unzip -Z1 "$zip" > "$RUNNER_TEMP/zip.lst"
+          for f in main.py plugin.json package.json dist/index.js bin/idle_render_host; do grep -qxF "Inkterface/$f" "$RUNNER_TEMP/zip.lst"; done
+          grep -q '^Inkterface/screens/' "$RUNNER_TEMP/zip.lst"
+          unzip -Zv "$zip" Inkterface/bin/idle_render_host | grep -qi 'unix file attributes (100755 octal)'   # shipped executable
+          ! unzip -p "$zip" Inkterface/plugin.json | grep -q '"debug"'   # dev-only flag: hot reload, not for release builds
+          grep -q '^Inkterface/py_modules/inkterface_core/firmware.py$' "$RUNNER_TEMP/zip.lst"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          flags=()
+          [[ "$VERSION" == *-* ]] && flags+=(--prerelease)
+          gh release create "$GITHUB_REF_NAME" "inkterface-plugin-${VERSION}.zip" \
+            --title "Plugin ${VERSION}" --generate-notes --verify-tag "${flags[@]}"

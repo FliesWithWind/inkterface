@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "id": "hello-screen",
+  "name": "Hello Screen",
+  "version": "1.0.0",
+  "author": "Inkterface contributors",
+  "description": "Example community screen: a greeting, the time and the CPU load. No code, safe to install.",
+  "active": {
+    "refresh_s": 5,
+    "widgets": [
+      { "type": "text", "x": 0, "y": 0, "w": 648, "h": 64, "text": " {settings.greeting}", "font": "bold-32",
+        "valign": "middle", "invert": true },
+      { "type": "clock", "x": 0, "y": 120, "w": 648, "h": 140, "format": "%H:%M", "font": "bold-96" },
+      { "type": "text", "x": 24, "y": 300, "w": 200, "h": 28, "text": "CPU load", "font": "regular-20" },
+      { "type": "number", "x": 24, "y": 330, "w": 240, "h": 70, "bind": "system.cpu.load", "unit": "%",
+        "font": "bold-64" }
+    ]
+  },
+  "settings": [
+    { "key": "greeting", "type": "string", "label": "Greeting", "default": "Hello, Inkterface" }
+  ]
+}

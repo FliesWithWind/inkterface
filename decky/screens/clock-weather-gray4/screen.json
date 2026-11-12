@@ -1,0 +1,245 @@
+{
+  "schema": 1,
+  "id": "clock-weather-gray4",
+  "name": "Clock & Weather (gray4)",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "Same layout as Clock & Weather, refreshed every 15 minutes.",
+  "idle": {
+    "render_mode": "gray4",
+    "sources": {
+      "time": {
+        "type": "clock"
+      },
+      "wx": {
+        "type": "weather"
+      }
+    },
+    "widgets": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 0,
+        "w": 648,
+        "h": 36,
+        "font": "bold-18",
+        "text": " CLOCK & WEATHER",
+        "invert": true,
+        "valign": "middle"
+      },
+      {
+        "type": "clock",
+        "x": 320,
+        "y": 0,
+        "w": 320,
+        "h": 36,
+        "bind": "time.now",
+        "format": "%a %d %b",
+        "font": "bold-18",
+        "align": "right",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "clock",
+        "x": 0,
+        "y": 40,
+        "w": 648,
+        "h": 180,
+        "bind": "time.now",
+        "format": "%H:%M",
+        "font": "bold-160",
+        "align": "center",
+        "valign": "middle"
+      },
+      {
+        "type": "clock",
+        "x": 0,
+        "y": 222,
+        "w": 648,
+        "h": 40,
+        "bind": "time.now",
+        "format": "%A, %d %B",
+        "font": "regular-28",
+        "align": "center",
+        "valign": "middle",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 276,
+        "w": 600,
+        "h": 2,
+        "text": "",
+        "invert": true,
+        "color": 2
+      },
+      {
+        "type": "icon",
+        "x": 24,
+        "y": 292,
+        "w": 96,
+        "h": 96,
+        "bind": "wx.current.code",
+        "set": "weather"
+      },
+      {
+        "type": "number",
+        "x": 132,
+        "y": 296,
+        "w": 230,
+        "h": 64,
+        "bind": "wx.current.temp",
+        "format": "{:.0f}",
+        "unit": "°C",
+        "font": "bold-48",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 132,
+        "y": 358,
+        "w": 260,
+        "h": 28,
+        "font": "regular-22",
+        "text": "{wx.current.condition}",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 400,
+        "y": 300,
+        "w": 224,
+        "h": 28,
+        "font": "regular-22",
+        "text": "HIGH {wx.today.max:.0f}°  LOW {wx.today.min:.0f}°",
+        "align": "right",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 400,
+        "y": 330,
+        "w": 224,
+        "h": 28,
+        "font": "regular-22",
+        "text": "RAIN {wx.today.rain:.0f}%",
+        "align": "right",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 400,
+        "y": 360,
+        "w": 224,
+        "h": 28,
+        "font": "regular-22",
+        "text": "{wx.today.sunrise} / {wx.today.sunset}",
+        "align": "right",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 392,
+        "w": 600,
+        "h": 2,
+        "text": "",
+        "invert": true,
+        "color": 2
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 398,
+        "w": 200,
+        "h": 24,
+        "font": "bold-18",
+        "text": "{wx.forecast[0].day}"
+      },
+      {
+        "type": "icon",
+        "x": 24,
+        "y": 424,
+        "w": 44,
+        "h": 44,
+        "bind": "wx.forecast[0].code",
+        "set": "weather",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 76,
+        "y": 432,
+        "w": 150,
+        "h": 32,
+        "font": "regular-28",
+        "text": "{wx.forecast[0].max:.0f}°/{wx.forecast[0].min:.0f}°",
+        "valign": "middle",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 232,
+        "y": 398,
+        "w": 200,
+        "h": 24,
+        "font": "bold-18",
+        "text": "{wx.forecast[1].day}"
+      },
+      {
+        "type": "icon",
+        "x": 232,
+        "y": 424,
+        "w": 44,
+        "h": 44,
+        "bind": "wx.forecast[1].code",
+        "set": "weather",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 284,
+        "y": 432,
+        "w": 150,
+        "h": 32,
+        "font": "regular-28",
+        "text": "{wx.forecast[1].max:.0f}°/{wx.forecast[1].min:.0f}°",
+        "valign": "middle",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 440,
+        "y": 398,
+        "w": 200,
+        "h": 24,
+        "font": "bold-18",
+        "text": "{wx.forecast[2].day}"
+      },
+      {
+        "type": "icon",
+        "x": 440,
+        "y": 424,
+        "w": 44,
+        "h": 44,
+        "bind": "wx.forecast[2].code",
+        "set": "weather",
+        "color": 1
+      },
+      {
+        "type": "text",
+        "x": 492,
+        "y": 432,
+        "w": 150,
+        "h": 32,
+        "font": "regular-28",
+        "text": "{wx.forecast[2].max:.0f}°/{wx.forecast[2].min:.0f}°",
+        "valign": "middle",
+        "color": 1
+      }
+    ],
+    "refresh_interval_s": 900
+  }
+}

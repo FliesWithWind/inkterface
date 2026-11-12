@@ -1,0 +1,2 @@
+# Tracked files over 2 MB that are allowed anyway (see CONTRIBUTING.md). None today.
+# Do not add entries: host big media elsewhere. One repo-relative path per line.

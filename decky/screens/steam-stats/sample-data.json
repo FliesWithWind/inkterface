@@ -1,0 +1,19 @@
+{
+  "epoch": 1794316020,
+  "tz": "CET-1CEST,M3.5.0,M10.5.0/3",
+  "values": {
+    "st.persona": "PlayerOne",
+    "st.level": 42,
+    "st.games_owned": 318,
+    "st.hours_total": 5127,
+    "st.friends_online": 18,
+    "st.recent[0].name": "Hades II",
+    "st.recent[0].hours2w": 23,
+    "st.recent[1].name": "Balatro",
+    "st.recent[1].hours2w": 11,
+    "st.recent[2].name": "Counter-Strike 2",
+    "st.recent[2].hours2w": 4,
+    "st.online": 38450211,
+    "st.players": 1204532
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "_comment": [
+    "Single source for the bill of materials. Edit links and affiliate settings here, then run: python3 tools/gen_bom.py",
+    "It rewrites the generated blocks in readme.md and docs/hardware.md. 'python3 tools/gen_bom.py --check' fails if they are stale.",
+    "This file is JSON, which is valid YAML 1.2, so the generator and the tests need no YAML library.",
+    "Link keys: 'seeed', 'openelab', 'aliexpress', or an Amazon marketplace host (amazon.pl, .de, .fr, .es, .it, .co.uk, .com); the key decides which affiliate setting applies.",
+    "Seeed: put your Affiliate Code (My Account > Affiliate Programs) in affiliate.seeed.code; links become <product>.html?sensecap_affiliate=<code>&referring_service=link, the form Seeed's own PROMO DATA link generator produces.",
+    "OpenELAB: affiliate.openelab.code is the referral code from the store's affiliate dashboard (the part after sca_ref= in its link); AliExpress: affiliate.aliexpress.short_key is the aff_short_key of your Portals account, links become s.click.aliexpress.com/deep_link.htm wrappers around the product URL."
+  ],
+
+  "affiliate": {
+    "_comment": "Empty means no tag is added anywhere. Fill in only IDs from your own affiliate accounts. Amazon tags are per marketplace.",
+    "amazon": {"amazon.pl": "flieswithwind-21", "amazon.de": "flieswithwi04-21", "amazon.fr": "flieswithwi0f-21", "amazon.es": "flieswithwi0a-21",
+               "amazon.it": "flieswithwi0d-21", "amazon.co.uk": "flieswithwi07-21", "amazon.com": "flieswithwind-20"},
+    "seeed": {"code": "dlPNUD2"},
+    "openelab": {"code": ""},
+    "aliexpress": {"short_key": ""}
+  },
+
+  "support": {
+    "_comment": "Funding usernames (letters, digits, - and _); kofi_button_id is the code of Ko-fi's button (upper-case letters and digits), shown only while kofi is set. Only the ones set appear in the readme Support section and in .github/FUNDING.yml; with both empty neither exists.",
+    "github_sponsors": "",
+    "kofi": "inkterface",
+    "kofi_button_id": "W7W72AIPDL"
+  },
+
+  "printables_url": "https://www.printables.com/model/1897091-inkterface-e-ink-faceplate-for-the-steam-machine-s",
+
+  "parts": [
+    {
+      "qty": "1",
+      "part": "XIAO ePaper Display Board (ESP32-S3) EE05",
+      "spec": "Seeed EE05, ESP32-S3, 24-pin FPC connector for the panel, USB-C",
+      "notes": "Runs the Inkterface firmware. USB powered.",
+      "links": {
+        "seeed": "https://www.seeedstudio.com/XIAO-ePaper-Display-Board-EE05-p-6755.html",
+        "openelab": "https://openelab.io/products/seeed-studio-xiao-epaper-board-ee05",
+        "aliexpress": "https://s.click.aliexpress.com/e/_c43WvPXd"
+      }
+    },
+    {
+      "qty": "1",
+      "part": "5.83\" monochrome ePaper display",
+      "spec": "648x480 pixels, UC8179 controller, FPC cable",
+      "notes": "Plugs straight into the EE05 FPC connector. No soldering. The flex cable is fragile.",
+      "links": {
+        "seeed": "https://www.seeedstudio.com/5-83-Monochrome-ePaper-Display-with-648x480-Pixels-p-5785.html",
+        "openelab": "https://openelab.io/products/goodisplay-5-83inch-e-paper",
+        "aliexpress": "https://s.click.aliexpress.com/e/_c3zLNr7N"
+      }
+    },
+    {
+      "qty": "4",
+      "part": "Magnets",
+      "spec": "10 x 10 x 4 mm",
+      "notes": "One per corner of the midplates. Orientation does not matter.",
+      "links": {
+        "amazon.pl": "https://www.amazon.pl/dp/B075P5M649",
+        "amazon.de": "https://www.amazon.de/dp/B075P5M649",
+        "amazon.fr": "https://www.amazon.fr/dp/B075P5M649",
+        "amazon.es": "https://www.amazon.es/dp/B075P5M649",
+        "amazon.it": "https://www.amazon.it/dp/B075P5M649",
+        "amazon.co.uk": "https://www.amazon.co.uk/dp/B075P5M649",
+        "amazon.com": "https://www.amazon.com/dp/B0H3TFLG55",
+        "aliexpress": "https://s.click.aliexpress.com/e/_c3g72c8j"
+      }
+    },
+    {
+      "qty": "13",
+      "part": "M2.5x5 flat head hex socket screw (304 stainless)",
+      "spec": "M2.5 thread, 5 mm long, flat head, hex socket",
+      "notes": "Threaded straight into the printed plastic.",
+      "links": {
+        "amazon.pl": "https://www.amazon.pl/dp/B0G6ZCMST1",
+        "amazon.de": "https://www.amazon.de/dp/B0G6ZCMST1",
+        "amazon.fr": "https://www.amazon.fr/dp/B0G6ZCMST1",
+        "amazon.es": "https://www.amazon.es/dp/B0G6ZCMST1",
+        "amazon.it": "https://www.amazon.it/dp/B0G6ZCMST1",
+        "amazon.co.uk": "https://www.amazon.co.uk/dp/B0G6ZCMST1",
+        "amazon.com": "https://www.amazon.com/dp/B0G6ZCMST1",
+        "aliexpress": "https://s.click.aliexpress.com/e/_c2Izsl8P"
+      }
+    },
+    {
+      "qty": "1",
+      "part": "USB-C to USB 2.0 cable, 0.5 m",
+      "spec": "USB-C plug to USB-A 2.0 plug, data and power",
+      "notes": "From the EE05 to a USB port on the Steam Machine. Must carry data, not charge-only.",
+      "links": {
+        "amazon.pl": "https://www.amazon.pl/dp/B07NSQ56DP",
+        "amazon.de": "https://www.amazon.de/dp/B07NSQ56DP",
+        "amazon.fr": "https://www.amazon.fr/dp/B07NSQ56DP",
+        "amazon.es": "https://www.amazon.es/dp/B07NSQ56DP",
+        "amazon.it": "https://www.amazon.it/dp/B07NSQ56DP",
+        "amazon.co.uk": "https://www.amazon.co.uk/dp/B07NSQ56DP",
+        "amazon.com": "https://www.amazon.com/dp/B07NSQ56DP",
+        "aliexpress": "https://s.click.aliexpress.com/e/_c4noGSGL"
+      }
+    }
+  ]
+}

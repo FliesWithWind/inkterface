@@ -1,0 +1,10 @@
+{
+  "steam.now_playing": {
+    "appid": 1245620,
+    "name": "Elden Ring: Shadow of the Erdtree",
+    "box_art_path": "sample-box-art.png",
+    "session_minutes": 83,
+    "total_minutes": 8525,
+    "last_achievement": "Rune of Death"
+  }
+}

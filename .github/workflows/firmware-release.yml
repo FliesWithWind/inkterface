@@ -1,0 +1,96 @@
+name: firmware-release
+
+# Tag fw-v<semver> -> build ee05, sign manifest.json with the ed25519 key in the repo secret
+# INKTERFACE_SIGNING_KEY, publish inkterface-ee05-<ver>.bin + manifest.json + manifest.sig.
+# Maintainer setup and release steps: docs/ota.md.
+
+on:
+  push:
+    tags: ["fw-v*"]
+
+permissions:
+  contents: write # create the release
+
+concurrency:
+  group: firmware-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # changelog from the previous fw-v tag
+
+      - name: Version from tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#fw-v}"
+          if ! [[ "$VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::tag ${GITHUB_REF_NAME} is not fw-v<semver>"; exit 1
+          fi
+          if [ "$VERSION" != "$(tr -d '[:space:]' < VERSION)" ]; then
+            echo "::error::tag says $VERSION but VERSION says $(tr -d '[:space:]' < VERSION)"; exit 1
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: pip install pytest==9.1.1 pyserial==3.5 cryptography==44.0.0
+      - run: decky/scripts/vendor.sh # pinned, sha256-checked Pillow (not in git); the tests import it
+      - run: pipx install platformio==6.1.18 # pio on the runner's own python, not the 3.14 used for the tests
+
+      - name: Tests must pass before anything is signed
+        run: python -m pytest -q decky/tests
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            firmware/.pio/libdeps
+          key: pio-${{ hashFiles('firmware/platformio.ini') }}
+
+      - name: Build ee05
+        working-directory: firmware
+        env:
+          INKTERFACE_FW_VERSION: ${{ env.VERSION }} # becomes HELLO.fw_ver, must equal manifest.version
+        run: |
+          cp -n src/ee05/idle_config.h.example src/ee05/idle_config.h
+          pio run -e ee05
+          # The version is a NUL-terminated string in the image. Do not use `strings | grep -x`: strings prints the
+          # printable byte in front of it too ("B1.0.0-beta.1"), so a whole-line match fails depending on layout.
+          python3 -c 'import sys; d = open(sys.argv[1], "rb").read(); sys.exit(0 if sys.argv[2].encode() + b"\0" in d else "version string not found in the image")' \
+            .pio/build/ee05/firmware.bin "$VERSION"
+
+      - name: Changelog
+        run: |
+          prev="$(git describe --tags --abbrev=0 --match 'fw-v*' "${GITHUB_REF_NAME}^" 2>/dev/null || true)"
+          { git log --pretty='- %s' ${prev:+"$prev"..}"${GITHUB_REF_NAME}" -- firmware decky/py_modules docs/usb-protocol-v1.md | head -40; } > changelog.txt
+          [ -s changelog.txt ] || echo "- Firmware $VERSION" > changelog.txt
+          cat changelog.txt
+
+      - name: Make and sign manifest
+        env:
+          INKTERFACE_SIGNING_KEY: ${{ secrets.INKTERFACE_SIGNING_KEY }}
+        run: |
+          if [ -z "$INKTERFACE_SIGNING_KEY" ]; then
+            echo "::error::repo secret INKTERFACE_SIGNING_KEY is not set (docs/ota.md)"; exit 1
+          fi
+          python3 tools/release/sign_manifest.py firmware/.pio/build/ee05/firmware.bin \
+            --version "$VERSION" --key-env INKTERFACE_SIGNING_KEY \
+            --min-plugin-version "$(tr -d '[:space:]' < firmware/min_plugin_version.txt)" \
+            --changelog-file changelog.txt --out-dir dist
+
+      - name: Verify exactly as the plugin will (bundled public key)
+        run: python3 tools/release/verify_release.py dist
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          flags=()
+          [[ "$VERSION" == *-* ]] && flags+=(--prerelease)
+          gh release create "$GITHUB_REF_NAME" \
+            "dist/inkterface-ee05-${VERSION}.bin" dist/manifest.json dist/manifest.sig \
+            --title "Firmware ${VERSION}" --notes-file changelog.txt --verify-tag "${flags[@]}"

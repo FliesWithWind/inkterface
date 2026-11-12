@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "hello-code-screen",
+  "name": "Hello Code Screen",
+  "version": "1.0.0",
+  "author": "Inkterface contributors",
+  "description": "Example community screen drawn by screen.py (code tier). Needs approval after install.",
+  "active": {
+    "refresh_s": 5,
+    "code": "screen.py",
+    "widgets": []
+  },
+  "settings": [
+    { "key": "title", "type": "string", "label": "Title", "default": "Hello from screen.py" }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "name": "DIY kit request",
+  "description": "Tell us what kind of DIY kit you would like, so we can see how much interest there is",
+  "title": "[Kit request] ",
+  "labels": [
+    "kit-request"
+  ],
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "A demand check for DIY kits. **One request per person.** If an existing request already says what you want, add a 👍 to it instead of opening a new issue."
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "kit",
+      "attributes": {
+        "label": "What would you like?",
+        "options": [
+          "Full DIY kit (EE05 board, 5.83\" panel, printed case, magnets, screws, USB cable)",
+          "Electronics only (EE05 board + panel)",
+          "Printed case only (with magnets and screws)",
+          "Fully assembled panel"
+        ]
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "input",
+      "id": "quantity",
+      "attributes": {
+        "label": "How many?",
+        "description": "A whole number.",
+        "value": "1"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "region",
+      "attributes": {
+        "label": "Where would it ship?",
+        "options": [
+          "Poland",
+          "Other EU country",
+          "United Kingdom",
+          "United States",
+          "Canada",
+          "Other"
+        ]
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "price",
+      "attributes": {
+        "label": "Price you would pay for a full kit",
+        "options": [
+          "under 60 EUR",
+          "60-80 EUR",
+          "80-100 EUR",
+          "100-130 EUR",
+          "over 130 EUR"
+        ]
+      },
+      "validations": {
+        "required": false
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "colour",
+      "attributes": {
+        "label": "Case colour",
+        "options": [
+          "Black",
+          "White",
+          "Grey",
+          "No preference"
+        ]
+      },
+      "validations": {
+        "required": false
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "notes",
+      "attributes": {
+        "label": "Anything else?"
+      },
+      "validations": {
+        "required": false
+      }
+    },
+    {
+      "type": "checkboxes",
+      "id": "terms",
+      "attributes": {
+        "label": "Before you submit",
+        "options": [
+          {
+            "label": "I understand this is a demand check, not an order: no payment is taken and nothing ships yet.",
+            "required": true
+          },
+          {
+            "label": "I will not post my address, email or phone number here (the issue is public).",
+            "required": true
+          }
+        ]
+      }
+    }
+  ]
+}

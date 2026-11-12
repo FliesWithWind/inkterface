@@ -1,0 +1,275 @@
+{
+  "schema": 1,
+  "id": "steam-stats",
+  "name": "Steam Stats",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "Steam profile, library and friends, recent games and concurrent players.",
+  "idle": {
+    "render_mode": "mono",
+    "refresh_interval_s": 60,
+    "full_refresh_every": 60,
+    "sources": {
+      "time": {
+        "type": "clock"
+      },
+      "st": {
+        "type": "steam",
+        "appid": "730"
+      }
+    },
+    "widgets": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 0,
+        "w": 648,
+        "h": 36,
+        "font": "bold-18",
+        "text": " STEAM",
+        "invert": true,
+        "valign": "middle"
+      },
+      {
+        "type": "clock",
+        "x": 320,
+        "y": 0,
+        "w": 320,
+        "h": 36,
+        "bind": "time.now",
+        "format": "%H:%M",
+        "font": "bold-18",
+        "align": "right",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 50,
+        "w": 600,
+        "h": 48,
+        "font": "bold-36",
+        "text": "{st.persona}",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 96,
+        "w": 600,
+        "h": 24,
+        "font": "regular-18",
+        "text": "LEVEL {st.level:.0f}"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 128,
+        "w": 200,
+        "h": 22,
+        "font": "bold-18",
+        "text": "GAMES"
+      },
+      {
+        "type": "number",
+        "x": 24,
+        "y": 152,
+        "w": 200,
+        "h": 56,
+        "bind": "st.games_owned",
+        "format": "{:.0f}",
+        "font": "bold-48",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 232,
+        "y": 128,
+        "w": 200,
+        "h": 22,
+        "font": "bold-18",
+        "text": "HOURS PLAYED"
+      },
+      {
+        "type": "number",
+        "x": 232,
+        "y": 152,
+        "w": 200,
+        "h": 56,
+        "bind": "st.hours_total",
+        "format": "{:.0f}",
+        "font": "bold-48",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 440,
+        "y": 128,
+        "w": 200,
+        "h": 22,
+        "font": "bold-18",
+        "text": "FRIENDS ONLINE"
+      },
+      {
+        "type": "number",
+        "x": 440,
+        "y": 152,
+        "w": 200,
+        "h": 56,
+        "bind": "st.friends_online",
+        "format": "{:.0f}",
+        "font": "bold-48",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 222,
+        "w": 600,
+        "h": 2,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 234,
+        "w": 300,
+        "h": 22,
+        "font": "bold-18",
+        "text": "RECENTLY PLAYED"
+      },
+      {
+        "type": "text",
+        "x": 344,
+        "y": 234,
+        "w": 280,
+        "h": 22,
+        "font": "bold-18",
+        "text": "HOURS / 2 WEEKS",
+        "align": "right"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 262,
+        "w": 440,
+        "h": 30,
+        "font": "regular-22",
+        "text": "{st.recent[0].name}",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 464,
+        "y": 262,
+        "w": 160,
+        "h": 30,
+        "bind": "st.recent[0].hours2w",
+        "format": "{:.0f}",
+        "unit": " h",
+        "font": "regular-22",
+        "align": "right",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 296,
+        "w": 440,
+        "h": 30,
+        "font": "regular-22",
+        "text": "{st.recent[1].name}",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 464,
+        "y": 296,
+        "w": 160,
+        "h": 30,
+        "bind": "st.recent[1].hours2w",
+        "format": "{:.0f}",
+        "unit": " h",
+        "font": "regular-22",
+        "align": "right",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 330,
+        "w": 440,
+        "h": 30,
+        "font": "regular-22",
+        "text": "{st.recent[2].name}",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 464,
+        "y": 330,
+        "w": 160,
+        "h": 30,
+        "bind": "st.recent[2].hours2w",
+        "format": "{:.0f}",
+        "unit": " h",
+        "font": "regular-22",
+        "align": "right",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 372,
+        "w": 600,
+        "h": 2,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 384,
+        "w": 300,
+        "h": 22,
+        "font": "bold-18",
+        "text": "ONLINE ON STEAM"
+      },
+      {
+        "type": "number",
+        "x": 24,
+        "y": 408,
+        "w": 280,
+        "h": 60,
+        "bind": "st.online",
+        "format": "{:.0f}",
+        "font": "bold-36",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 344,
+        "y": 384,
+        "w": 280,
+        "h": 22,
+        "font": "bold-18",
+        "text": "CS2 PLAYERS NOW",
+        "align": "right"
+      },
+      {
+        "type": "number",
+        "x": 344,
+        "y": 408,
+        "w": 280,
+        "h": 60,
+        "bind": "st.players",
+        "format": "{:.0f}",
+        "font": "bold-36",
+        "align": "right",
+        "valign": "middle"
+      }
+    ]
+  }
+}

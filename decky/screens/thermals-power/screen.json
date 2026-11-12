@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "id": "thermals-power",
+  "name": "Thermals & Power",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "Temperature gauges, fan speed and package power.",
+  "active": {
+    "size": [
+      648,
+      480
+    ],
+    "refresh_s": 1.0,
+    "widgets": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 0,
+        "w": 648,
+        "h": 30,
+        "text": "  THERMALS",
+        "font": "bold-20",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "gauge",
+        "x": 40,
+        "y": 40,
+        "w": 220,
+        "h": 200,
+        "bind": "system.cpu.temp",
+        "range": [
+          20,
+          100
+        ],
+        "thickness": 18,
+        "unit": "°C",
+        "font": "bold-36"
+      },
+      {
+        "type": "text",
+        "x": 40,
+        "y": 242,
+        "w": 220,
+        "h": 28,
+        "text": "CPU TEMP",
+        "font": "bold-18",
+        "align": "center"
+      },
+      {
+        "type": "gauge",
+        "x": 388,
+        "y": 40,
+        "w": 220,
+        "h": 200,
+        "bind": "system.gpu.temp",
+        "range": [
+          20,
+          100
+        ],
+        "thickness": 18,
+        "unit": "°C",
+        "font": "bold-36"
+      },
+      {
+        "type": "text",
+        "x": 388,
+        "y": 242,
+        "w": 220,
+        "h": 28,
+        "text": "GPU TEMP",
+        "font": "bold-18",
+        "align": "center"
+      },
+      {
+        "type": "text",
+        "x": 0,
+        "y": 282,
+        "w": 648,
+        "h": 30,
+        "text": "  POWER & COOLING",
+        "font": "bold-20",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "icon",
+        "x": 8,
+        "y": 324,
+        "w": 48,
+        "h": 48,
+        "name": "fan"
+      },
+      {
+        "type": "number",
+        "x": 64,
+        "y": 324,
+        "w": 176,
+        "h": 48,
+        "bind": "system.fan.rpm",
+        "unit": "RPM",
+        "font": "bold-28"
+      },
+      {
+        "type": "bar",
+        "x": 248,
+        "y": 336,
+        "w": 392,
+        "h": 24,
+        "bind": "system.fan.rpm",
+        "range": [
+          0,
+          6000
+        ]
+      },
+      {
+        "type": "icon",
+        "x": 8,
+        "y": 392,
+        "w": 48,
+        "h": 48,
+        "name": "bolt"
+      },
+      {
+        "type": "number",
+        "x": 64,
+        "y": 392,
+        "w": 176,
+        "h": 48,
+        "bind": "system.power.package_w",
+        "format": "{:.1f}",
+        "unit": "W",
+        "font": "bold-28"
+      },
+      {
+        "type": "sparkline",
+        "x": 248,
+        "y": 380,
+        "w": 392,
+        "h": 92,
+        "bind": "system.power.package_w.history",
+        "range": [
+          0,
+          30
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      }
+    ]
+  }
+}

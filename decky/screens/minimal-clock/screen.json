@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "minimal-clock",
+  "name": "Minimal Clock",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "The time and nothing else.",
+  "idle": {
+    "render_mode": "mono",
+    "refresh_interval_s": 60,
+    "full_refresh_every": 60,
+    "sources": {
+      "time": {
+        "type": "clock"
+      }
+    },
+    "widgets": [
+      {
+        "type": "clock",
+        "x": 0,
+        "y": 100,
+        "w": 648,
+        "h": 280,
+        "bind": "time.now",
+        "format": "%H:%M",
+        "font": "bold-160",
+        "align": "center",
+        "valign": "middle"
+      }
+    ]
+  }
+}

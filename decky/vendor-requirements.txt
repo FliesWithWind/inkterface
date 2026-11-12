@@ -1,0 +1,9 @@
+# Pinned, hash-checked Pillow for the Decky bundle (CPython 3.14, x86_64 manylinux). decky/scripts/vendor.sh installs
+# exactly this into py_modules/ and refuses any other bytes. Update: bump the version, take the new wheel's sha256 from
+# https://pypi.org/pypi/pillow/<version>/json (cp314 manylinux x86_64 wheel), run vendor.sh, run the tests.
+pillow==13.0.0 \
+    --hash=sha256:e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d
+# Pinned CA bundle (MPL-2.0 data, pure-Python wheel). inkterface_core/tls.py reads py_modules/certifi/cacert.pem by path
+# as the last-resort trust store when the OS has none. Update: same procedure as Pillow (certifi/<version> JSON, py3-none-any wheel).
+certifi==2026.10.23 \
+    --hash=sha256:e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1

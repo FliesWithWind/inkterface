@@ -1,0 +1,26 @@
+{
+  "epoch": 1794316020,
+  "tz": "CET-1CEST,M3.5.0,M10.5.0/3",
+  "values": {
+    "wx.current.temp": 11.4,
+    "wx.current.code": 2,
+    "wx.current.condition": "Partly Cloudy",
+    "wx.today.max": 13.2,
+    "wx.today.min": 6.8,
+    "wx.today.rain": 20,
+    "wx.today.sunrise": "07:41",
+    "wx.today.sunset": "16:48",
+    "wx.forecast[0].day": "WED",
+    "wx.forecast[0].max": 12.5,
+    "wx.forecast[0].min": 7.1,
+    "wx.forecast[0].code": 61,
+    "wx.forecast[1].day": "THU",
+    "wx.forecast[1].max": 9.4,
+    "wx.forecast[1].min": 4.0,
+    "wx.forecast[1].code": 3,
+    "wx.forecast[2].day": "FRI",
+    "wx.forecast[2].max": 8.0,
+    "wx.forecast[2].min": -0.4,
+    "wx.forecast[2].code": 71
+  }
+}

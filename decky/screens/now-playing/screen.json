@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "now-playing",
+  "name": "Now Playing",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "Box art, game name, playtime and latest achievement.",
+  "active": {
+    "size": [
+      648,
+      480
+    ],
+    "refresh_s": 5,
+    "widgets": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 30,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "icon",
+        "x": 4,
+        "y": 3,
+        "w": 24,
+        "h": 24,
+        "name": "gamepad",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 32,
+        "y": 0,
+        "w": 616,
+        "h": 30,
+        "text": "NOW PLAYING",
+        "font": "bold-20",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "now-playing",
+        "x": 8,
+        "y": 40,
+        "w": 632,
+        "h": 432
+      }
+    ]
+  }
+}

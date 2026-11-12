@@ -1,0 +1,4 @@
+{"response":{"game_count":3,"games":[
+{"appid":220,"name":"Half-Life 2","playtime_forever":600,"playtime_2weeks":0},
+{"appid":730,"name":"Counter-Strike 2","playtime_forever":1500,"playtime_2weeks":30},
+{"appid":892970,"name":"Valheim","playtime_forever":900}]}}

@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "id": "telemetry",
+  "name": "Telemetry",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "CPU and GPU load, temperature and clock as sparklines.",
+  "active": {
+    "size": [
+      648,
+      480
+    ],
+    "refresh_s": 1.0,
+    "widgets": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 30,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "icon",
+        "x": 4,
+        "y": 3,
+        "w": 24,
+        "h": 24,
+        "name": "cpu",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 32,
+        "y": 0,
+        "w": 616,
+        "h": 30,
+        "text": "CPU",
+        "font": "bold-20",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 38,
+        "w": 64,
+        "h": 56,
+        "text": "LOAD",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 38,
+        "w": 136,
+        "h": 56,
+        "bind": "system.cpu.load",
+        "unit": "%",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 38,
+        "w": 424,
+        "h": 56,
+        "bind": "system.cpu.load.history",
+        "range": [
+          0,
+          100
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 104,
+        "w": 64,
+        "h": 56,
+        "text": "TEMP",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 104,
+        "w": 136,
+        "h": 56,
+        "bind": "system.cpu.temp",
+        "unit": "°C",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 104,
+        "w": 424,
+        "h": 56,
+        "bind": "system.cpu.temp.history",
+        "range": [
+          20,
+          100
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 170,
+        "w": 64,
+        "h": 56,
+        "text": "CLOCK",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 170,
+        "w": 136,
+        "h": 56,
+        "bind": "system.cpu.clock",
+        "unit": "MHz",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 170,
+        "w": 424,
+        "h": 56,
+        "bind": "system.cpu.clock.history",
+        "range": [
+          0,
+          5000
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      },
+      {
+        "type": "text",
+        "x": 0,
+        "y": 244,
+        "w": 32,
+        "h": 30,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "icon",
+        "x": 4,
+        "y": 247,
+        "w": 24,
+        "h": 24,
+        "name": "gpu",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 32,
+        "y": 244,
+        "w": 616,
+        "h": 30,
+        "text": "GPU",
+        "font": "bold-20",
+        "valign": "middle",
+        "invert": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 282,
+        "w": 64,
+        "h": 56,
+        "text": "LOAD",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 282,
+        "w": 136,
+        "h": 56,
+        "bind": "system.gpu.load",
+        "unit": "%",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 282,
+        "w": 424,
+        "h": 56,
+        "bind": "system.gpu.load.history",
+        "range": [
+          0,
+          100
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 348,
+        "w": 64,
+        "h": 56,
+        "text": "TEMP",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 348,
+        "w": 136,
+        "h": 56,
+        "bind": "system.gpu.temp",
+        "unit": "°C",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 348,
+        "w": 424,
+        "h": 56,
+        "bind": "system.gpu.temp.history",
+        "range": [
+          20,
+          100
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      },
+      {
+        "type": "text",
+        "x": 8,
+        "y": 414,
+        "w": 64,
+        "h": 56,
+        "text": "CLOCK",
+        "font": "regular-14",
+        "valign": "middle"
+      },
+      {
+        "type": "number",
+        "x": 72,
+        "y": 414,
+        "w": 136,
+        "h": 56,
+        "bind": "system.gpu.clock",
+        "unit": "MHz",
+        "font": "bold-28",
+        "align": "right"
+      },
+      {
+        "type": "sparkline",
+        "x": 216,
+        "y": 414,
+        "w": 424,
+        "h": 56,
+        "bind": "system.gpu.clock.history",
+        "range": [
+          0,
+          2800
+        ],
+        "show_labels": true,
+        "border": 1,
+        "fill": true
+      }
+    ]
+  }
+}

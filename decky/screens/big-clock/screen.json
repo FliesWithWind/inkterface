@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "id": "big-clock",
+  "name": "Big Clock",
+  "version": "1.0.0",
+  "author": "Inkterface",
+  "description": "Time, date and a weather line.",
+  "active": {
+    "size": [
+      648,
+      480
+    ],
+    "refresh_s": 10,
+    "widgets": [
+      {
+        "type": "clock",
+        "x": 0,
+        "y": 30,
+        "w": 648,
+        "h": 200,
+        "format": "{settings.time_format}",
+        "font": "bold-160"
+      },
+      {
+        "type": "clock",
+        "x": 0,
+        "y": 236,
+        "w": 648,
+        "h": 48,
+        "format": "{settings.date_format}",
+        "font": "regular-32"
+      },
+      {
+        "type": "text",
+        "x": 24,
+        "y": 304,
+        "w": 600,
+        "h": 2,
+        "text": "",
+        "invert": true
+      },
+      {
+        "type": "icon",
+        "x": 110,
+        "y": 330,
+        "w": 96,
+        "h": 96,
+        "bind": "weather.icon"
+      },
+      {
+        "type": "text",
+        "x": 230,
+        "y": 322,
+        "w": 320,
+        "h": 60,
+        "text": "{weather.temp:.0f}°",
+        "font": "bold-48",
+        "valign": "middle"
+      },
+      {
+        "type": "text",
+        "x": 230,
+        "y": 384,
+        "w": 400,
+        "h": 30,
+        "text": "{weather.condition}",
+        "font": "regular-24"
+      },
+      {
+        "type": "text",
+        "x": 230,
+        "y": 416,
+        "w": 400,
+        "h": 28,
+        "text": "H {weather.high:.0f}°   L {weather.low:.0f}°",
+        "font": "regular-20"
+      }
+    ]
+  },
+  "settings": [
+    {
+      "key": "time_format",
+      "type": "string",
+      "label": "Time format (strftime)",
+      "default": "%H:%M"
+    },
+    {
+      "key": "date_format",
+      "type": "string",
+      "label": "Date format (strftime)",
+      "default": "%A, %d %B %Y"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{"playerstats":{"steamID":"76561198000000001","gameName":"Counter-Strike 2","success":true,"achievements":[
+{"apiname":"A1","achieved":1,"unlocktime":1700000000,"name":"First Blood"},
+{"apiname":"A2","achieved":1,"unlocktime":1700009999,"name":"Latest One"},
+{"apiname":"A3","achieved":0,"unlocktime":0,"name":"Locked"},
+{"apiname":"A4","achieved":1,"unlocktime":1690000000}]}}

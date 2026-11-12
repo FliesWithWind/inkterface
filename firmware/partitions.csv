@@ -1,0 +1,12 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+# 8MB flash: two ~3.19M app slots for signed USB OTA (docs/ota.md; the image is ~1.1M, so each slot has
+# ~3x headroom) plus a 128K raw "idlestore" for the host-pushed idle layouts (docs/idle-mode.md).
+# nvs stays first so the pushed idle timeout survives. 0x670000 + 0x20000 = 0x690000 < 8M.
+#
+# NOTE: moving from an older table requires a one-time USB flash; OTA only works after that wired flash.
+nvs,      data, nvs,     0x9000,   0x5000,
+otadata,  data, ota,     0xe000,   0x2000,
+app0,     app,  ota_0,   0x10000,  0x330000,
+app1,     app,  ota_1,   0x340000, 0x330000,
+# idle layout store: two 64 KiB slots (docs/idle-mode.md). Raw data partition, custom subtype 0x40.
+idlestore, data, 0x40,   0x670000, 0x20000,

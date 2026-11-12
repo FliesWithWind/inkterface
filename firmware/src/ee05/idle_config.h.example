@@ -1,0 +1,63 @@
+// Idle-screen configuration for the EE05 firmware.
+//
+// Copy this file to `idle_config.h` (same directory) and fill in your values.
+// `idle_config.h` is gitignored so your Wi-Fi password and any Steam API key
+// are never committed.
+//
+//   cp idle_config.h.example idle_config.h
+//
+// These are the compile-time DEFAULTS of the idle screens. At runtime the host overrides them
+// over USB (the CONFIG section of the stored layout set, docs/idle-mode.md), and a panel that was
+// provisioned by the old BLE app keeps those settings (read-only NVS migration). The panel connects
+// to Wi-Fi only while it is idle (the host has been silent for a while), shows the layout the host
+// stored in flash and drops Wi-Fi again when the host comes back.
+//
+// SECURITY NOTE: these values are compiled into the firmware image. Anyone who
+// can read the board's flash can recover them. That is usually fine for a home
+// faceplate, but do not reuse a sensitive password here.
+
+#ifndef IDLE_CONFIG_H
+#define IDLE_CONFIG_H
+
+// ---------------------------------------------------------------------------
+// Wi-Fi (required for the idle screen to fetch anything)
+// ---------------------------------------------------------------------------
+#define WIFI_SSID "your-network"
+#define WIFI_PASS "your-password"
+
+// ---------------------------------------------------------------------------
+// Location + time
+// ---------------------------------------------------------------------------
+// Latitude/longitude for weather and sunrise/sunset (Open-Meteo, no API key).
+#define IDLE_LAT 52.3676
+#define IDLE_LON 4.9041
+
+// POSIX TZ string so the clock shows local time with correct DST.
+// Examples:
+//   Amsterdam:      "CET-1CEST,M3.5.0,M10.5.0/3"
+//   New York:       "EST5EDT,M3.2.0,M11.1.0"
+//   Los Angeles:    "PST8PDT,M3.2.0,M11.1.0"
+//   London:         "GMT0BST,M3.5.0/1,M10.5.0"
+#define IDLE_TZ "CET-1CEST,M3.5.0,M10.5.0/3"
+
+// 1 = metric (C, km/h), 0 = imperial (F, mph)
+#define IDLE_USE_METRIC 1
+
+// ---------------------------------------------------------------------------
+// Steam
+// ---------------------------------------------------------------------------
+// App id used for the always-available "players now" line (no API key needed).
+// Examples: Counter-Strike 2 = 730, Dota 2 = 570, Team Fortress 2 = 440.
+#define STEAM_APPID 730
+// Label shown next to the player count (keep it short for the panel).
+#define STEAM_APPNAME "CS2"
+
+// Optional personal stats. Leave STEAM_API_KEY empty ("") to disable them and
+// show only the public player count. To enable:
+//   1. Get a key: https://steamcommunity.com/dev/apikey
+//   2. Find your 64-bit SteamID (steamid, e.g. via steamid.io).
+//   3. Set your Steam profile "game details" to Public.
+#define STEAM_API_KEY ""
+#define STEAM_ID64 ""
+
+#endif /* IDLE_CONFIG_H */

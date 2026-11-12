@@ -1,0 +1,11 @@
+{
+  "name": "Inkterface",
+  "author": "Inkterface",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": ["e-ink", "display"],
+    "description": "Drive an Inkterface e-ink display over USB serial.",
+    "image": "https://raw.githubusercontent.com/FliesWithWind/inkterface/main/decky/tests/idle/goldens/clock-weather.png"
+  }
+}
