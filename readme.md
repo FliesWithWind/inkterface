@@ -19,9 +19,17 @@ Based on [Valve's original Inkterface](https://gitlab.steamos.cloud/SteamHardwar
 >
 > **Use at your own risk.** This is a hobby project, provided as is, with no warranty of any kind (see [LICENSE](LICENSE)). The author is not responsible for any damage to your Steam Machine, the display, the EE05 board, USB ports or any other hardware, or for any data loss, from building, flashing or using it.
 
+<!-- gen:support -->
+## Support
+
+Inkterface is free and open source. If it is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/inkterface).
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W72AIPDL)
+<!-- /gen:support -->
+
 <p align="center"><img src="docs/img/build/live-telemetry.webp" alt="The e-ink panel on the front of a Steam Machine, updating live with system telemetry" width="400"></p>
 
-[Build one](#build-one) · [Features](#features) · [Screenshots](#screenshots) · [Hardware](#hardware) · [Install](#install) · [Quick start](#quick-start) · [Screens](#screens-and-the-screen-store) · [Docs](#docs) · [Contributing](#contributing) · [Security](#security) · [Support](#support) · [License](#license-and-credits)
+[Support](#support) · [Build one](#build-one) · [Features](#features) · [Screenshots](#screenshots) · [Hardware](#hardware) · [Install](#install) · [Quick start](#quick-start) · [Screens](#screens-and-the-screen-store) · [Docs](#docs) · [Contributing](#contributing) · [Security](#security) · [License](#license-and-credits)
 
 ## Build one
 
@@ -173,14 +181,6 @@ New screens go to the [screens repository](https://github.com/FliesWithWind/inkt
   you approve the exact code. Only approve code you trust.
 * **Report a vulnerability** with GitHub's private reporting: the Security tab, then **Report a vulnerability**.
   Full model and limits: [SECURITY.md](SECURITY.md).
-
-<!-- gen:support -->
-## Support
-
-Inkterface is free and open source. If it is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/inkterface).
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W72AIPDL)
-<!-- /gen:support -->
 
 ## License and credits
 

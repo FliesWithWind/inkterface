@@ -48,13 +48,18 @@ def test_printables_url_matches_the_bom_and_is_not_a_placeholder():
 
 def test_section_order_and_unique_headings():
     assert len(H2) == len(set(H2))
-    order = ["Build one", "Features", "Screenshots", "Hardware", "Install", "Quick start", "Screens and the Screen Store", "Docs",
-             "Contributing", "Security", "Support", "License and credits"]
+    order = ["Support", "Build one", "Features", "Screenshots", "Hardware", "Install", "Quick start", "Screens and the Screen Store", "Docs",
+             "Contributing", "Security", "License and credits"]
     assert H2 == order
 
 
 def _local(ref: str) -> bool:
     return not re.match(r"[a-z][a-z0-9+.-]*:|#", ref, re.I)
+
+
+def test_support_is_in_the_upper_part_between_the_notice_and_the_hero():
+    assert README.index("**Use at your own risk.**") < README.index("## Support") < README.index("live-telemetry.webp") < README.index("## Build one")
+    assert README.count("## Support") == 1 and README.count("githubbutton_sm.svg") == 1
 
 
 def test_every_relative_link_image_and_anchor_resolves():

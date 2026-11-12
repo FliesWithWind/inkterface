@@ -328,11 +328,10 @@ NOTICE = ("> ⚠️ **Beta.** Inkterface is beta software and hardware. Expect b
           "or for any data loss, from building, flashing or using it.")
 
 
-def test_readme_top_order_notice_before_build_one_and_support_once_after_the_security_section():
+def test_readme_top_order_notice_then_support_before_build_one_and_support_once():
     readme = (ROOT / "readme.md").read_text(encoding="utf-8")
     assert NOTICE in readme
-    assert readme.index("<h1") < readme.index(NOTICE) < readme.index("## Build one") < readme.index("## Features")
-    assert readme.index("## Security") < readme.index("## Support") < readme.index("## License and credits")
+    assert readme.index("<h1") < readme.index(NOTICE) < readme.index("## Support") < readme.index("## Build one") < readme.index("## Features")
     assert readme.count("<!-- gen:support -->") == 1
 
 
