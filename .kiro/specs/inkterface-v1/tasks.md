@@ -123,7 +123,7 @@ are not recorded in this repository. Requirement numbers refer to `requirements.
     - _Requirements: 10.6_
   - [x] 10.7 OTA from a real GitHub release succeeds
     - _Requirements: 10.7_
-  - [x] 10.8 A forced rollback recovers on real hardware
+  - [x] 10.8 A forced rollback recovers on real hardware (passed 2026-11-10 with a test-key OTA image: rolled back 181.2 s after the image was sent)
     - _Requirements: 10.8_
 
 - [ ] 11. Planned, not part of v1

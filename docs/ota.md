@@ -227,13 +227,14 @@ cd firmware && g++ -std=c++17 -O1 -Wall -Wextra -fsanitize=address,undefined -Is
 
 ## Real hardware (not covered by the automated tests)
 
-Verified on a Steam Machine by the maintainer on 2026-11-12:
+Verified on a Steam Machine by the maintainer:
 
-- A real signed GitHub release, `fw-v1.0.0-beta.2` (a pre-release), was found, verified and installed end to end by the
+- 2026-11-12: a real signed GitHub release, `fw-v1.0.0-beta.2` (a pre-release), was found, verified and installed end to end by the
   plugin, updating the panel from beta.1 to 1.0.0-beta.2. The new image was accepted and there was no rollback. Until then
   the update path had only run against a fake GitHub with a test key.
-- A forced rollback recovered (criterion 8 of the v1 hardware checks).
-- The panel re-enumerated after the reboot and the host's HELLO ack was accepted (the install is only confirmed after it).
+- 2026-11-10: a forced rollback recovered (criterion 8 of the v1 hardware checks). A test-key OTA image that was never
+  confirmed was sent, and the panel rolled back to the old firmware 181.2 s after the image was sent.
+- 2026-11-12: the panel re-enumerated after the reboot and the host's HELLO ack was accepted (the install is only confirmed after it).
 
 Not recorded anywhere yet:
 
