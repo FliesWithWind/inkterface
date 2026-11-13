@@ -225,16 +225,23 @@ cd firmware && g++ -std=c++17 -O1 -Wall -Wextra -fsanitize=address,undefined -Is
 | key + signing tools, `verify_release`, whole chain sign to flashed emulator | `.../test_ota_tools.py` |
 | firmware state machine vs emulator, byte for byte (scripted + 40 random streams), and the C++ selftest: out-of-order, overflow, bad hash, bad image, flash faults, power loss mid-write (old image intact), resume, mark-valid, verify-timer rollback, legacy image, millis wrap | `decky/tests/test_ota_cpp.py`, `firmware/host_test/ota_host.cpp` |
 
-## Needs real hardware (not covered by the automated tests)
+## Real hardware (not covered by the automated tests)
 
-- Actual flash behaviour of `esp_ota_begin(SEQUENTIAL_WRITES)` / `esp_ota_end` on the EE05, and
-  the real transfer time. Estimate only: ~1.5 MB over a ~234 KB/s link is ~6 s of wire time, plus
-  4 KB sector erases while writing, so likely 15-30 s total.
-- The bootloader really rolling back: flash a deliberately broken image (e.g. a build whose
-  `setup()` never reaches a HELLO, or send no ack) and check the panel returns to the old
-  firmware after ~180 s. Also unplug during OTA_DATA and check the old firmware boots.
-- HWCDC behaviour when the panel is busy writing flash: no bytes lost with the 8192-byte
-  window? (`OtaResync` recovers if some are.)
-- The USB re-enumeration after reboot on the Steam Machine (device path, time to HELLO; the
-  Wi-Fi connect in `setup()` can delay it by ~25 s, well inside the 180 s verify window and the
-  120 s `confirm_boot` default).
+Verified on a Steam Machine by the maintainer:
+
+- 2026-11-12: a real signed GitHub release, `fw-v1.0.0-beta.2` (a pre-release), was found, verified and installed end to end by the
+  plugin, updating the panel from beta.1 to 1.0.0-beta.2. The new image was accepted and there was no rollback. Until then
+  the update path had only run against a fake GitHub with a test key.
+- 2026-11-10: a forced rollback recovered (criterion 8 of the v1 hardware checks). A test-key OTA image that was never
+  confirmed was sent, and the panel rolled back to the old firmware 181.2 s after the image was sent.
+- 2026-11-12: the panel re-enumerated after the reboot and the host's HELLO ack was accepted (the install is only confirmed after it).
+
+Not recorded anywhere yet:
+
+- The real transfer time and the actual flash behaviour of `esp_ota_begin(SEQUENTIAL_WRITES)` / `esp_ota_end`. Estimate
+  only: ~1.5 MB over a ~234 KB/s link is ~6 s of wire time, plus 4 KB sector erases while writing, so likely 15-30 s total.
+- Unplugging the cable during OTA_DATA and checking that the old firmware boots.
+- HWCDC behaviour when the panel is busy writing flash: no bytes lost with the 8192-byte window? (`OtaResync` recovers if
+  some are.)
+- The measured time from reboot to HELLO and the device path after re-enumeration (the Wi-Fi connect in `setup()` can
+  delay it by ~25 s, well inside the 180 s verify window and the 120 s `confirm_boot` default).

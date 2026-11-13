@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "large-files-on-stop",
+      "description": "When the agent finishes a turn, fail if any tracked file is over 2 MB (the rule in CONTRIBUTING.md; CI runs the same script).",
+      "trigger": "Stop",
+      "action": {
+        "type": "command",
+        "command": "python3 tools/check_file_sizes.py"
+      },
+      "timeout": 60
+    }
+  ]
+}

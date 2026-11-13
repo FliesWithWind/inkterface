@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "firmware-host-tests-on-edit",
+      "description": "Build and run the firmware's host tests with address and undefined-behaviour sanitizers (the same g++ commands as the firmware job in .github/workflows/ci.yml) after the agent edits firmware C++.",
+      "trigger": "PostFileSave",
+      "matcher": "firmware/(src|host_test)/.*\\.(cpp|h)$",
+      "action": {
+        "type": "command",
+        "command": "cd firmware && T=\"${TMPDIR:-/tmp}\" && g++ -std=c++17 -O1 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc/ee05 host_test/ota_host.cpp src/ee05/ota_usb.cpp src/ee05/usbproto.cpp -o \"$T/ink_ota_host\" && \"$T/ink_ota_host\" --selftest && g++ -std=c++17 -O1 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc/ee05 host_test/usb_bus_watch_host.cpp src/ee05/usbproto.cpp -o \"$T/ink_usb_bus_watch_host\" && \"$T/ink_usb_bus_watch_host\""
+      },
+      "timeout": 300
+    }
+  ]
+}
