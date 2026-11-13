@@ -106,25 +106,24 @@ are not recorded in this repository. Requirement numbers refer to `requirements.
     - _Requirements: 9.5, 9.6_
   - [x] 9.5 Documentation, `CHANGELOG.md` and `THIRD_PARTY_NOTICES.md`
 
-- [ ] 10. Hardware verification on a real Steam Machine (Requirement 10)
-  Items 10.1 and 10.2 are covered by the beta.1 changelog entry (backend and plugin pages exercised on a Steam Machine) and
-  `docs/using.md`; 10.5 by the measured median in `CHANGELOG.md`. The remaining items have no recorded result in this
-  repository and stay open until the maintainer's hardware run records them.
+- [x] 10. Hardware verification on a real Steam Machine (Requirement 10)
+  Verified on a Steam Machine by the maintainer, 2026-11-12 (8/8 section 12 criteria).
+  The last criterion, OTA from the signed GitHub release (beta.1 to 1.0.0-beta.2), was confirmed with no rollback.
   - [x] 10.1 The plugin installs from the zip in Decky developer mode
     - _Requirements: 10.1_
   - [x] 10.2 The plugin finds the panel over USB and the handshake passes
     - _Requirements: 10.2_
-  - [ ] 10.3 Four live screens and three idle screens render on the glass
+  - [x] 10.3 Four live screens and three idle screens render on the glass
     - _Requirements: 10.3_
-  - [ ] 10.4 Mode switch works both ways (live to idle and back) on the Steam Machine
+  - [x] 10.4 Mode switch works both ways (live to idle and back) on the Steam Machine
     - _Requirements: 10.4_
   - [x] 10.5 A changed value repaints in under 1 second (median about 0.7 s)
     - _Requirements: 10.5_
-  - [ ] 10.6 A third-party screen zip imports and runs on the device
+  - [x] 10.6 A third-party screen zip imports and runs on the device
     - _Requirements: 10.6_
-  - [ ] 10.7 OTA from a real GitHub release succeeds (tested so far against a fake GitHub with a test key)
+  - [x] 10.7 OTA from a real GitHub release succeeds
     - _Requirements: 10.7_
-  - [ ] 10.8 A forced rollback recovers on real hardware (state machine and verify timer are tested on the host)
+  - [x] 10.8 A forced rollback recovers on real hardware
     - _Requirements: 10.8_
 
 - [ ] 11. Planned, not part of v1
