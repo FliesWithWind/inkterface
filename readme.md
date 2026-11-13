@@ -13,8 +13,8 @@ Live stats, what you are playing and a clock on a 5.83" panel, over one USB cabl
 </p>
 
 <p align="center">
-<img src="docs/img/build/steam-machine-front.jpg" alt="The e-ink panel on the front of a Steam Machine, with a controller on top" width="300">
-<img src="docs/img/build/live-telemetry.webp" alt="The panel updating live with system telemetry" width="330">
+<img src="docs/img/build/steam-machine-front.jpg" alt="The e-ink panel on the front of a Steam Machine, with a controller on top" width="285">
+<img src="docs/img/build/live-telemetry.webp" alt="The panel updating live with system telemetry" width="348">
 <br><sub>The panel on a Steam Machine, updating live over one USB cable.</sub>
 </p>
 
@@ -58,13 +58,14 @@ The USB cable runs under the Steam Machine, out of sight. No battery and no sold
 
 ### Plugin pages in Gaming Mode
 
-| Live Screens | Standby Screens |
-|---|---|
-| ![Live Screens page with the panel preview and the rotation list](docs/ui/device/gm-live.png) | ![Standby Screens page with the panel status and four panel screens](docs/ui/device/gm-standby.png) |
+Live Screens, Standby Screens, Screen Store and the In a game list.
 
-| Screen Store | In-game list |
-|---|---|
-| ![Screen Store with three community screens](docs/ui/device/gm-store.png) | ![Live Screens with the In a game tab and its own rotation](docs/ui/device/gm-live-ingame.png) |
+<p align="center">
+<img src="docs/ui/device/gm-live.png" alt="Live Screens page with the panel preview and the rotation list" width="410">
+<img src="docs/ui/device/gm-standby.png" alt="Standby Screens page with the panel status and four panel screens" width="410">
+<img src="docs/ui/device/gm-store.png" alt="Screen Store with three community screens" width="410">
+<img src="docs/ui/device/gm-live-ingame.png" alt="Live Screens with the In a game tab and its own rotation" width="410">
+</p>
 
 ### The build
 
