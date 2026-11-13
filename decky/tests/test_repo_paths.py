@@ -14,7 +14,7 @@ import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TOP = ("decky", "firmware", "docs", "tools", "boards", "design", "assets", ".github")
+TOP = ("decky", "firmware", "docs", "tools", "boards", "design", "assets", ".github", ".kiro")
 SKIP_DIRS = {".git", "node_modules", ".pio", "py_modules", "dist", "out", "__pycache__"}
 GENERATED = ("/.pio/", "/dist/", "/out/", "/node_modules/", "src/ee05/idle_config.h",
              "decky/py_modules/PIL", "decky/py_modules/certifi")  # build output (vendor.sh), gitignored

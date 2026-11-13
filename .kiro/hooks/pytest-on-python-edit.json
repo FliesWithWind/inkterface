@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "pytest-on-python-edit",
+      "description": "Run the Python test suite (protocol, emulator, engine, plugin backend, OTA, firmware host tests, docs path check) after the agent edits Python under decky/. Needs decky/scripts/vendor.sh to have run once.",
+      "trigger": "PostFileSave",
+      "matcher": "decky/.*\\.py$",
+      "action": {
+        "type": "command",
+        "command": "python3 -m pytest decky/tests -q -x"
+      },
+      "timeout": 900
+    }
+  ]
+}

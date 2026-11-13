@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "frontend-checks-on-edit",
+      "description": "Typecheck and run the vitest suite after the agent edits the Decky frontend (decky/src or decky/test). pnpm is not installed globally, so it runs through npx.",
+      "trigger": "PostFileSave",
+      "matcher": "decky/(src|test)/.*\\.tsx?$",
+      "action": {
+        "type": "command",
+        "command": "cd decky && npx pnpm@9 typecheck && npx pnpm@9 test"
+      },
+      "timeout": 600
+    }
+  ]
+}

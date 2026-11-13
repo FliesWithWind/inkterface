@@ -196,5 +196,9 @@ Inkterface is free and open source. If it is useful to you, you can support its 
   PlatformIO layout come from [Valve's Inkterface](https://gitlab.steamos.cloud/SteamHardware/SteamMachine/inkterface)
   (MIT, Copyright (c) 2026 Valve Software). Valve's Bluetooth and Qt app and Feather firmware are not used here;
   [docs/references.md](docs/references.md) links them.
+* **Prior work and credits:** Inkterface builds on [Valve's open source Inkterface](https://gitlab.steamos.cloud/SteamHardware/SteamMachine/inkterface)
+  (MIT, 2026), which was written for an Adafruit Feather and drove the panel over Bluetooth from a Qt app. This project replaces that
+  stack with USB, a Decky plugin and EE05 firmware. Third-party libraries are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+* **Built with Kiro:** the specs, steering and hooks used to build this repository with Kiro are in [`.kiro/`](.kiro/).
 * **Third party:** Pillow (fetched at build time) and IBM Plex Mono, modified and renamed Inkterface Mono, under the
   SIL OFL. Full list: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
