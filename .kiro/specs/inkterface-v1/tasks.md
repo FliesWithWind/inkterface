@@ -128,5 +128,5 @@ are not recorded in this repository. Requirement numbers refer to `requirements.
 
 - [ ] 11. Planned, not part of v1
   - [ ] 11.1 Submit the plugin to the Decky store
-  - [ ] 11.2 Publish the first signed firmware release
+  - [x] 11.2 Publish the first signed firmware release (`fw-v1.0.0-beta.2`, a pre-release, installed by OTA on a Steam Machine)
   - [ ] 11.3 Real Wi-Fi soak of idle sources, and a long idle and sleep/wake soak (`docs/idle-mode.md`, "Not yet verified")

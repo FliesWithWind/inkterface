@@ -92,8 +92,9 @@ v1 replaces all of it:
   stay near 0.65 s.
 - **Installing the plugin needs Decky Developer mode** (Install plugin from ZIP file) and root on the Steam Machine
   (`~/homebrew/plugins` is root-owned). The first release is a GitHub zip, not a Decky store plugin.
-- **No real GitHub release has been exercised end to end.** Firmware updates were tested against a fake GitHub with a
-  test key, and on a real panel through the same test seam. The first tagged release is the first real run.
+- **Real-release OTA has been run once.** The signed `fw-v1.0.0-beta.2` GitHub release (a pre-release) was installed end to
+  end on a Steam Machine, beta.1 to 1.0.0-beta.2, on 2026-11-12, with no rollback. Before that, updates were tested against a
+  fake GitHub with a test key. Details of what is still unmeasured: [docs/ota.md](docs/ota.md#real-hardware-not-covered-by-the-automated-tests).
 - **The panel does not verify signatures.** Anyone who can open its serial port can flash it. The signature protects the
   update path from GitHub, not the panel from local access ([SECURITY.md](SECURITY.md)).
 - **Wi-Fi password and Steam API key sit unencrypted in the panel's flash**, and the panel's TLS client does not validate
@@ -103,7 +104,6 @@ v1 replaces all of it:
 ### Planned
 
 - Decky plugin store submission (not part of this release).
-- The first signed firmware release.
 
 [Unreleased]: https://github.com/FliesWithWind/inkterface/compare/plugin-v1.0.0-beta.1...HEAD
 [1.0.0-beta.1]: https://github.com/FliesWithWind/inkterface/releases/tag/plugin-v1.0.0-beta.1
