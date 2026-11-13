@@ -1,35 +1,33 @@
-<p align="center"><img src="assets/valve/icon256.png" alt="Inkterface icon" width="256" height="256"></p>
-<h1 align="center"><img src="assets/valve/Library_Logo.png" alt="Inkterface" width="420"></h1>
+<h1 align="center"><img src="assets/valve/icon256.png" alt="" width="96" height="96" align="middle"> <img src="assets/valve/Library_Logo.png" alt="Inkterface" width="320" align="middle"></h1>
 
 <p align="center"><b>An e-ink faceplate for the Steam Machine.</b><br>
 Live stats, what you are playing and a clock on a 5.83" panel, over one USB cable.</p>
 
 <p align="center">
 <a href="https://www.printables.com/model/1897091-inkterface-e-ink-faceplate-for-the-steam-machine-s"><img alt="Print it on Printables" src="https://img.shields.io/badge/Print%20it%20on-Printables-FA6831?logo=printables&logoColor=white&style=for-the-badge"></a>
-<a href="https://github.com/FliesWithWind/inkterface/actions/workflows/ci.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/FliesWithWind/inkterface/ci.yml?branch=main&label=CI&style=for-the-badge"></a>
-<a href="https://github.com/FliesWithWind/inkterface/releases"><img alt="Latest firmware release" src="https://img.shields.io/github/v/release/FliesWithWind/inkterface?include_prereleases&filter=fw-v*&label=firmware&style=for-the-badge"></a>
-<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/FliesWithWind/inkterface?style=for-the-badge"></a>
+<a href="https://ko-fi.com/inkterface"><img alt="Support on Ko-fi" src="https://img.shields.io/badge/Support%20on-Ko--fi-0B6FBF?logo=kofi&logoColor=white&style=for-the-badge"></a>
+<br>
+<a href="https://github.com/FliesWithWind/inkterface/actions/workflows/ci.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/FliesWithWind/inkterface/ci.yml?branch=main&label=CI"></a>
+<a href="https://github.com/FliesWithWind/inkterface/releases"><img alt="Latest firmware release" src="https://img.shields.io/github/v/release/FliesWithWind/inkterface?include_prereleases&filter=Firmware*&display_name=release&label=&color=blue"></a>
+<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/FliesWithWind/inkterface"></a>
+</p>
+
+<p align="center">
+<img src="docs/img/build/steam-machine-front.jpg" alt="The e-ink panel on the front of a Steam Machine, with a controller on top" width="300">
+<img src="docs/img/build/live-telemetry.webp" alt="The panel updating live with system telemetry" width="330">
+<br><sub>The panel on a Steam Machine, updating live over one USB cable.</sub>
 </p>
 
 Inkterface is a [Decky Loader](https://decky.xyz) plugin plus custom firmware for the Seeed XIAO ePaper Display Board EE05.
 A 648x480 e-paper panel magnets onto the front of the Steam Machine. One USB cable, no battery, no soldering.
 Based on [Valve's original Inkterface](https://gitlab.steamos.cloud/SteamHardware/SteamMachine/inkterface).
 
-> ⚠️ **Beta.** Inkterface is beta software and hardware. Expect bugs, rough edges and changes between releases.
+> [!WARNING]
+> **Beta.** Inkterface is beta software and hardware. Expect bugs, rough edges and changes between releases.
 >
 > **Use at your own risk.** This is a hobby project, provided as is, with no warranty of any kind (see [LICENSE](LICENSE)). The author is not responsible for any damage to your Steam Machine, the display, the EE05 board, USB ports or any other hardware, or for any data loss, from building, flashing or using it.
 
-<!-- gen:support -->
-## Support
-
-Inkterface is free and open source. If it is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/inkterface).
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W72AIPDL)
-<!-- /gen:support -->
-
-<p align="center"><img src="docs/img/build/live-telemetry.webp" alt="The e-ink panel on the front of a Steam Machine, updating live with system telemetry" width="400"></p>
-
-[Support](#support) · [Build one](#build-one) · [Features](#features) · [Screenshots](#screenshots) · [Hardware](#hardware) · [Install](#install) · [Quick start](#quick-start) · [Screens](#screens-and-the-screen-store) · [Docs](#docs) · [Contributing](#contributing) · [Security](#security) · [License](#license-and-credits)
+[Build one](#build-one) · [Features](#features) · [Screenshots](#screenshots) · [Hardware](#hardware) · [Install](#install) · [Quick start](#quick-start) · [Screens](#screens-and-the-screen-store) · [Docs](#docs) · [Contributing](#contributing) · [Security](#security) · [Support](#support) · [License](#license-and-credits)
 
 ## Build one
 
@@ -58,7 +56,7 @@ The USB cable runs under the Steam Machine, out of sight. No battery and no sold
 
 ## Screenshots
 
-Steam Machine, Gaming Mode:
+### Plugin pages in Gaming Mode
 
 | Live Screens | Standby Screens |
 |---|---|
@@ -68,12 +66,10 @@ Steam Machine, Gaming Mode:
 |---|---|
 | ![Screen Store with three community screens](docs/ui/device/gm-store.png) | ![Live Screens with the In a game tab and its own rotation](docs/ui/device/gm-live-ingame.png) |
 
-The build:
+### The build
 
-| Front | Back |
-|---|---|
-| ![The e-ink panel on the front of the Steam Machine, with a controller on top](docs/img/build/steam-machine-front.jpg) | ![Back of the build: the EE05 in the remixed board plate, four magnets and the USB cable routed out at a corner](docs/img/build/build-back.jpg) |
-| The panel on the Steam Machine. | The EE05 in the board plate, 4 magnets, USB cable routed out under the Steam Machine. |
+<p align="center"><img src="docs/img/build/build-back.jpg" alt="Back of the build: the EE05 in the remixed board plate, four magnets and the USB cable routed out at a corner" width="520"><br>
+<sub>The EE05 in the board plate, 4 magnets, USB cable routed out under the Steam Machine.</sub></p>
 
 ## Hardware
 
@@ -181,6 +177,14 @@ New screens go to the [screens repository](https://github.com/FliesWithWind/inkt
   you approve the exact code. Only approve code you trust.
 * **Report a vulnerability** with GitHub's private reporting: the Security tab, then **Report a vulnerability**.
   Full model and limits: [SECURITY.md](SECURITY.md).
+
+<!-- gen:support -->
+## Support
+
+Inkterface is free and open source. If it is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/inkterface).
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W72AIPDL)
+<!-- /gen:support -->
 
 ## License and credits
 

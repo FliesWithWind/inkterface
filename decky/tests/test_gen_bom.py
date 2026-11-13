@@ -322,16 +322,17 @@ def test_kofi_button_id_must_be_upper_case_letters_and_digits():
         raise AssertionError(bad)
 
 
-NOTICE = ("> ⚠️ **Beta.** Inkterface is beta software and hardware. Expect bugs, rough edges and changes between releases.\n>\n"
+NOTICE = ("> [!WARNING]\n> **Beta.** Inkterface is beta software and hardware. Expect bugs, rough edges and changes between releases.\n>\n"
           "> **Use at your own risk.** This is a hobby project, provided as is, with no warranty of any kind (see [LICENSE](LICENSE)). "
           "The author is not responsible for any damage to your Steam Machine, the display, the EE05 board, USB ports or any other hardware, "
           "or for any data loss, from building, flashing or using it.")
 
 
-def test_readme_top_order_notice_then_support_before_build_one_and_support_once():
+def test_readme_top_order_notice_before_build_one_and_support_section_before_license_once():
     readme = (ROOT / "readme.md").read_text(encoding="utf-8")
     assert NOTICE in readme
-    assert readme.index("<h1") < readme.index(NOTICE) < readme.index("## Support") < readme.index("## Build one") < readme.index("## Features")
+    assert readme.index("<h1") < readme.index(NOTICE) < readme.index("## Build one") < readme.index("## Features")
+    assert readme.index("## Security") < readme.index("## Support") < readme.index("## License and credits")
     assert readme.count("<!-- gen:support -->") == 1
 
 

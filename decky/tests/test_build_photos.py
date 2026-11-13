@@ -29,6 +29,7 @@ def test_readme_and_hardware_doc_use_every_photo_with_alt_text():
     for text, path_pat in ((readme, r"docs/img/build/"), (hardware, r"img/build/")):
         for alt, _ in re.findall(r"!\[([^\]]*)\]\(" + path_pat + r"([^)]+)\)", text):
             assert len(alt) > 15, alt
-    assert re.search(r'<img src="docs/img/build/live-telemetry.webp" alt="[^"]{15,}"', readme)
-    assert readme.index("live-telemetry.webp") < readme.index("## Build one") < readme.index("## Features") < readme.index("## Screenshots")
-    assert readme.index("## Screenshots") < readme.index("steam-machine-front.jpg") < readme.index("build-back.jpg") < readme.index("## Hardware")
+    for photo in ("steam-machine-front.jpg", "live-telemetry.webp", "build-back.jpg"):
+        assert re.search(rf'<img src="docs/img/build/{re.escape(photo)}" alt="[^"]{{15,}}" width="\d+"', readme), photo
+    assert readme.index("steam-machine-front.jpg") < readme.index("live-telemetry.webp") < readme.index("## Build one")  # the hero, above the first section
+    assert readme.index("## Screenshots") < readme.index("build-back.jpg") < readme.index("## Hardware")
