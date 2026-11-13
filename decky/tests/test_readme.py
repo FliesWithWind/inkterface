@@ -22,12 +22,15 @@ def test_printables_link_is_in_the_top_badge_row():
     badge = re.search(rf'<a href="{re.escape(PRINTABLES)}"><img alt="Print it on Printables" src="(https://img\.shields\.io/badge/[^"]+)"', top)
     assert badge and "logo=printables" in badge.group(1)
     assert top.index(PRINTABLES) < top.index("actions/workflows/ci.yml")  # first in the row
+    assert top.index(PRINTABLES) < top.index("https://ko-fi.com/inkterface") < top.index("actions/workflows/ci.yml")  # Ko-fi next to it
 
 
 def test_top_row_has_ci_release_and_licence_badges():
     top = README[:README.index("\n## ")]
     assert "actions/workflow/status/FliesWithWind/inkterface/ci.yml" in top and "(/actions/workflows/ci.yml)" not in top
-    assert re.search(r'github/v/release/FliesWithWind/inkterface\?[^"]*include_prereleases', top)
+    fw = re.search(r'github/v/release/FliesWithWind/inkterface\?([^"]*)', top)
+    assert fw and "include_prereleases" in fw.group(1)
+    assert "display_name=release" in fw.group(1) and "filter=Firmware*" in fw.group(1)  # reads "Firmware 1.0.0-beta.2", not the raw fw-v tag
     assert 'github/license/FliesWithWind/inkterface' in top and 'href="LICENSE"' in top
 
 
@@ -48,8 +51,8 @@ def test_printables_url_matches_the_bom_and_is_not_a_placeholder():
 
 def test_section_order_and_unique_headings():
     assert len(H2) == len(set(H2))
-    order = ["Support", "Build one", "Features", "Screenshots", "Hardware", "Install", "Quick start", "Screens and the Screen Store", "Docs",
-             "Contributing", "Security", "License and credits"]
+    order = ["Build one", "Features", "Screenshots", "Hardware", "Install", "Quick start", "Screens and the Screen Store", "Docs",
+             "Contributing", "Security", "Support", "License and credits"]
     assert H2 == order
 
 
@@ -57,9 +60,21 @@ def _local(ref: str) -> bool:
     return not re.match(r"[a-z][a-z0-9+.-]*:|#", ref, re.I)
 
 
-def test_support_is_in_the_upper_part_between_the_notice_and_the_hero():
-    assert README.index("**Use at your own risk.**") < README.index("## Support") < README.index("live-telemetry.webp") < README.index("## Build one")
+def test_support_badge_is_up_top_and_the_full_section_is_just_before_license():
+    assert README.index("https://ko-fi.com/inkterface") < README.index("## Build one") < README.index("## Support") < README.index("## License and credits")
+    assert H2.index("Support") == H2.index("License and credits") - 1
     assert README.count("## Support") == 1 and README.count("githubbutton_sm.svg") == 1
+
+
+def test_header_is_compact_and_the_hero_follows_the_badges():
+    head = README[:README.index("\n## ")]
+    assert re.search(r'<h1 align="center"><img src="assets/valve/icon256.png" alt="" width="(9\d|1[0-2]\d)"', head)  # icon 90-129 px, not 256
+    assert 'Library_Logo.png" alt="Inkterface" width="320"' in head
+    assert head.index("Library_Logo.png") < head.index("<b>An e-ink faceplate") < head.index("ci.yml") < head.index("steam-machine-front.jpg") < head.index("live-telemetry.webp")
+
+
+def test_beta_notice_is_a_github_warning_alert():
+    assert "> [!WARNING]\n> **Beta.**" in README and "\n> **Use at your own risk.**" in README
 
 
 def test_every_relative_link_image_and_anchor_resolves():
