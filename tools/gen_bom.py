@@ -80,10 +80,22 @@ def render_printed(data: dict) -> str:
             "(Copyright (c) 2026 Valve Software), see THIRD_PARTY_NOTICES.md and Valve's GitLab repository.")
 
 
+def _is_tagged(url: str, key: str, aff: dict) -> bool:
+    """True when the link as rendered carries affiliate tracking: a Portals short link, or one `_tag` changed."""
+    return urlsplit(url).hostname == "s.click.aliexpress.com" or _tag(url, key, aff) != url
+
+
+def all_links_tagged(data: dict) -> bool:
+    """True when every store link in the parts list is an affiliate link."""
+    links = [(k, u) for p in data["parts"] for k, u in p["links"].items()]
+    return bool(links) and all(_is_tagged(u, k, data["affiliate"]) for k, u in links)
+
+
 def render_affiliate(data: dict) -> str:
     if not has_affiliate(data):
         return ""
-    text = ("**Affiliate links.** Some store links in the parts list are affiliate links: if you buy through them, "
+    which = "All" if all_links_tagged(data) else "Some"
+    text = (f"**Affiliate links.** {which} store links in the parts list are affiliate links: if you buy through them, "
             "the project may earn a small commission at no extra cost to you.")
     if any(v.strip() for v in data["affiliate"]["amazon"].values()):
         text += " As an Amazon Associate I earn from qualifying purchases."  # wording Amazon's Operating Agreement asks for
