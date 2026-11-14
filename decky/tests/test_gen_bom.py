@@ -105,14 +105,35 @@ def test_untagged_when_settings_are_empty_for_the_new_rows():
     assert "B0G6ZCMST1)" in out and "B075P5M649)" in out and "B0H3TFLG55)" in out and "tag=" not in out
 
 
-def test_seeed_urls_carry_the_code_and_openelab_is_never_tagged():
+def test_seeed_and_openelab_urls_carry_their_codes():
     out = gen.render_bom(DATA)
     assert out.count("sensecap_affiliate=dlPNUD2&referring_service=link)") == 2  # board and panel
-    for p in DATA["parts"]:
-        for k, u in p["links"].items():
-            if k == "openelab":
-                assert f"]({u})" in out and "?" not in u  # exact, untagged URL
-    assert gen._tag("https://openelab.io/products/x", "openelab", DATA["affiliate"]) == "https://openelab.io/products/x"
+    openelab = [u for p in DATA["parts"] for k, u in p["links"].items() if k == "openelab"]
+    assert len(openelab) == 2
+    for u in openelab:
+        assert f"]({u}?sca_ref=12756853.BPGYejTTQ2)" in out  # tagged exactly once
+    assert out.count("sca_ref=") == 2
+
+
+def test_every_store_link_in_the_committed_bom_is_an_affiliate_link():
+    links = [(k, u) for p in DATA["parts"] for k, u in p["links"].items()]
+    untagged = [u for k, u in links if not gen._is_tagged(u, k, DATA["affiliate"])]
+    assert untagged == []
+    assert gen.all_links_tagged(DATA)
+    assert gen.render_affiliate(DATA).startswith("**Affiliate links.** All store links")
+
+
+def test_disclosure_says_some_when_one_store_is_untagged():
+    d = copy.deepcopy(DATA)
+    d["affiliate"]["openelab"]["code"] = ""
+    assert not gen.all_links_tagged(d)
+    assert gen.render_affiliate(d).startswith("**Affiliate links.** Some store links")
+
+
+def test_all_links_tagged_is_false_for_an_empty_parts_list():
+    d = copy.deepcopy(DATA)
+    d["parts"] = []
+    assert not gen.all_links_tagged(d)
 
 
 def test_disclosure_is_present_and_short():
